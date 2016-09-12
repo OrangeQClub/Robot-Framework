@@ -1,0 +1,33 @@
+*** Settings ***
+Default Tags
+Metadata          Test Framework    Robot Framework
+Metadata          Executed at    %{COMPUTERNAME}
+Metadata          Executed By    %{USERNAME}
+Library           Selenium2Library
+Resource          LoginUI.txt
+Resource          readFromFile.py
+Library           ExcelUtility
+
+*** Variables ***
+${BROWSER}        firefox
+
+*** Test Cases ***
+loginTestCases
+    [Tags]    login
+    Open Browser and Maxmize Window
+    Login
+
+*** Keywords ***
+Open Browser and Maxmize Window
+    Open Browser    http://demo.mahara.org/    ${BROWSER}
+    Maximize Browser Window
+
+Login
+    Wait Until Element Is Visible    ${Login Button}    30s
+    ${Username}    Read Cell Value     accounts.xlsx    account    A    2
+    Input Text    ${Username ID}    ${Username}
+    ${password}    Read Cell Value    accounts.xlsx    account    B    2
+    Input Text    ${Password ID}    ${password}
+    Click Button    ${Login Button}
+
+Logout

@@ -1,0 +1,22 @@
+*** Settings ***
+Library           Selenium2Library
+
+*** Test Cases ***
+Scroll Page
+    [Tags]    scroll
+    Open Browser    http://demo.mahara.org/    firefox
+    Maximize Browser Window
+    ${Width}    ${height}=    Get Window Size
+    Log    ${Width} ,${height}
+    Sleep    10s
+    : FOR    ${index}    IN RANGE    1    1000    100
+    \    Scroll Page To Location    0    ${index}
+    \    Log    "current location" , 0,${index}
+    \    Sleep    5s
+    \    Scroll Page To Location    0    -${index}
+    \    Sleep    5s
+
+*** Keywords ***
+Scroll Page To Location
+    [Arguments]    ${x_location}    ${y_location}
+    Execute Javascript    window.scrollTo(${x_location} | ${y_location})

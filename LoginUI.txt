@@ -1,0 +1,4 @@
+*** Variables ***
+${Username ID}    id=login_login_username
+${Password ID}    id=login_login_password
+${Login Button}    id=login_submit
