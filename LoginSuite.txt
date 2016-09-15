@@ -9,7 +9,7 @@ Resource          readFromFile.py
 Library           ExcelUtility
 
 *** Variables ***
-${BROWSER}        firefox
+${BROWSER}        phantomjs
 
 *** Test Cases ***
 loginTestCases
